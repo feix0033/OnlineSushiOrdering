@@ -1,0 +1,28 @@
+<h1>Products</h1>
+<ul *ngIf="products$ | async as products else loading">
+<!--  "|" is a pipe-->
+<!--  "async" means it will keep listening-->
+<!--  "as products" means it will store the object array form observable in to an array products-->
+<!--  when the products$ didn't get the date send back then use 'else' to run the 'loading' template-->
+  <!--  this is angular for loop-->
+  <li *ngFor="let product of products">
+    id: {{product.id}} | name: {{product.name}}
+  </li>
+
+</ul>
+
+
+<ng-template #loading>
+  <p *ngIf="!error else errorTemp">
+  .... loading
+  </p>
+
+
+<!--  {{error | json}} &lt;!&ndash;  use pipe to convert the object as json &ndash;&gt;<br>-->
+
+  <ng-template #errorTemp>
+  {{error?.message}} <!-- '?' means if that is not null, then show the message of error-->
+  </ng-template>
+
+</ng-template>
+<!-- this is called angular template, the # is an id mark-->
